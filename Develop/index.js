@@ -56,13 +56,25 @@ const questions = [
         message: 'What does the user need to know about using the repo?',
         name: 'usage',
         validate: (value) => { if (value) { return true } else { return 'I need a value to continue' } },
-];
+}];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(questions).then((inquirerResponses) => {
+        console.log('Generating README...');
+        writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
+    })
+}
 
 // Function call to initialize app
-init();
+init() {
+    inquirer.prompt(questions).then((inquirerResponses) => {
+        console.log('Generating README...');
+        writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
+    })
+};
